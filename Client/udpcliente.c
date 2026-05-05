@@ -52,6 +52,8 @@ int main(int argc, char* argv[])
         exit(EXIT_FAILURE);
     }
 
+    printf("Conectando a %s:%d\n", ip, port);
+
     int contChar = 0;
     strcat(contenido, fileName);
     strcat(contenido, "\n");
@@ -101,5 +103,5 @@ int main(int argc, char* argv[])
    
     // close the descriptor 
     close(sockfd); 
-    printf("Conexion cerrada\n");
-} 
+    printf("\nConexion cerrada\n");
+}

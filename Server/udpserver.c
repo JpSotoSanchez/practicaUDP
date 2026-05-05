@@ -12,17 +12,27 @@
 #include <unistd.h> 
 #include <stdlib.h>
 
-#define PORT 15000 
 #define MAXLINE 65535 // Ajustado para recibir paquetes grandes
 
-int main()
+int main(int argc, char* argv[])
 {
+    if (argc != 2) {
+        fprintf(stderr, "Uso: %s <puerto>\n", argv[0]);
+        exit(EXIT_FAILURE);
+    }
+
+    int PORT = atoi(argv[1]);
+    if (PORT <= 0 || PORT > 65535) {
+        fprintf(stderr, "Puerto inválido: %s\n", argv[1]);
+        exit(EXIT_FAILURE);
+    }
+
     char buffer[MAXLINE];
     int listenfd;
     socklen_t len; // Cambio a socklen_t
     struct sockaddr_in servaddr, cliaddr;
 
-    printf("Listening in port number: %d\n", PORT);
+    printf("Listening in port %d\n", PORT);
 
     // Crear socket
     listenfd = socket(AF_INET, SOCK_DGRAM, 0);
